@@ -1,0 +1,87 @@
+package com.musicstore.recommendations.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "track_recommendation")
+public class TrackRecommendation {
+    @Id
+    @Column(name = "track_recommendation_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    private int trackId;
+
+    private int userId;
+
+    private boolean liked;
+
+    public TrackRecommendation() {
+    }
+
+    public TrackRecommendation(Integer id, int trackId, int userId, boolean liked) {
+        this.id = id;
+        this.trackId = trackId;
+        this.userId = userId;
+        this.liked = liked;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public int getTrackId() {
+        return trackId;
+    }
+
+    public void setTrackId(int trackId) {
+        this.trackId = trackId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public boolean isLiked() {
+        return liked;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TrackRecommendation that = (TrackRecommendation) o;
+        return getTrackId() == that.getTrackId() && getUserId() == that.getUserId() && isLiked() == that.isLiked() && Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getTrackId(), getUserId(), isLiked());
+    }
+
+    @Override
+    public String toString() {
+        return "TrackRecommendation{" +
+                "id=" + id +
+                ", trackId=" + trackId +
+                ", userId=" + userId +
+                ", liked=" + liked +
+                '}';
+    }
+}
